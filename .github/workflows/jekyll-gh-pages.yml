@@ -29,6 +29,7 @@ jobs:
       - name: Vite Github Pages Deployer
         uses: skywarth/vite-github-pages-deployer@v1.3.0
         with:
+          public_base_path: ./
           install_phase_node_env: production
           build_phase_node_env: production
           package_manager: yarn
