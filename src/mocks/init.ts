@@ -4,7 +4,14 @@ export async function enableMocking() {
 
     // `worker.start()` returns a Promise that resolves
     // once the Service Worker is up and ready to intercept requests.
-    return worker.start();
+    return worker.start({
+      serviceWorker: {
+        url: '/lp-tsn/mockServiceWorker.js',
+        options: {
+          scope: '/lp-tsn/',
+        },
+      },
+    });
   }
 
   return;

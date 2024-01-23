@@ -13,11 +13,9 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import ToastsContainer from '@/components/ToastsContainer';
 
 function App() {
-  const baseName = import.meta.env.PROD ? '/lp-tsn' : undefined;
-
   return (
     <>
-      <BrowserRouter basename={baseName}>
+      <BrowserRouter basename={'/lp-tsn'}>
         <Routes>
           <Route path="/login" element={<Login toasts={toasts} />} />
           <Route
