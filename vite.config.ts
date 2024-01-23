@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/lp-tsn/', // for GitHub Pages
+  base: mode === 'production' ? '/lp-tsn/' : undefined, // for GitHub Pages
   plugins: [
     react(),
     VitePWA({
