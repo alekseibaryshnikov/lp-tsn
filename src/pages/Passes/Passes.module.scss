@@ -1,0 +1,92 @@
+.Passes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: calc(var(--default-gap) + 136px);
+  padding-bottom: var(--default-gap);
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .navbarContainer {
+      display: flex;
+      width: 100%;
+      max-width: 375px;
+      justify-content: space-between;
+    }
+  }
+
+  .filterBar {
+    text-align: left;
+    position: fixed;
+    top: 50px;
+    padding: var(--default-gap);
+    background: white;
+    z-index: 9;
+  }
+
+  .card {
+    text-align: left;
+    margin: 0 var(--default-gap);
+
+    div {
+      margin-bottom: 5px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &.inService {
+      border-color: green;
+    }
+
+    &.expired {
+      background: rgba(208, 200, 200, 0.3);
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        content: "не действителен";
+        position: absolute;
+        bottom: -5px;
+        right: 5px;
+        font-size: 30px;
+        margin: 0;
+        padding: 0;
+        opacity: 0.07;
+        text-transform: uppercase;
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: calc(1.5 * var(--default-gap));
+      text-transform: uppercase;
+      color: grey;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .carPlate {
+      background: white;
+      border: 2px solid black;
+      border-radius: 5px;
+      padding: 1px 4px;
+      max-width: fit-content;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (min-width: 462px) {
+  .Passes {
+    padding-top: calc(var(--default-gap) + 101px);
+  }
+}
+
