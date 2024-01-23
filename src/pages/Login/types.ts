@@ -1,4 +1,4 @@
-import { Nullable } from '../../core/types';
+import { Nullable } from '@/core/types.ts';
 
 export type LoginRq = {
     action: Action;

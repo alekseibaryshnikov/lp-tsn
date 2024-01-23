@@ -45,6 +45,10 @@ jobs:
       - name: Build Project
         run: yarn build
 
+      - name: Create env file
+        run: |
+          echo "VITE_API_KEY=${{ secrets.API_KEY }}" > .env
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:

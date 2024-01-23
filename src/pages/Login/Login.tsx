@@ -5,7 +5,7 @@ import httpClient from '@/services/HttpClient';
 import { observer } from 'mobx-react-lite';
 import Toasts from '@/store/Toasts';
 import { ApiResponse, Nullable } from '@/core/types';
-import localStorage from '@/services/LocalStorage';
+import LocalStorage from '@/services/LocalStorage';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Logo from '@/components/Logo';
@@ -81,7 +81,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
       action,
       phone,
       codeSMS,
-      apiKey: null,
+      apiKey: import.meta.env.VITE_API_KEY,
     };
 
     try {
@@ -102,7 +102,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
             return;
           }
 
-          localStorage.setAuthToken(response.data.token);
+          LocalStorage.setAuthToken(response.data.token);
           showToast('Вы успешно вошли в систему', 'success');
           setStep(Steps.Phone);
           navigate('/');
