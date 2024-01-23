@@ -12,12 +12,12 @@ import {
 } from '@blueprintjs/core';
 import styles from './Passes.module.scss';
 import { Nullable } from '@/core/types.ts';
-import * as classNames from 'classnames';
 import { sortByDate } from '@/core/date.utils.ts';
 import Toasts from '@/store/Toasts.ts';
 import { CreationDialog } from '@/pages/Passes/CreationDialog/CreationDialog';
 import LocalStorageService from '@/services/LocalStorage';
 import { Comment } from '@/pages/Passes/Comment/Comment.tsx';
+import classNames from 'classnames';
 
 type Props = {
   toasts: typeof Toasts;
