@@ -15,12 +15,12 @@ export default defineConfig(({ mode }) => ({
         theme_color: '#ffffff',
         icons: [
           {
-            src: '/src/assets/moose_logo_192x192.png',
+            src: 'moose_logo_192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/src/assets/moose_logo_512x512.png',
+            src: 'moose_logo_512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
