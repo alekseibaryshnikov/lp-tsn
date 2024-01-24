@@ -2,29 +2,30 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-top: calc(var(--default-gap) + 136px);
+  padding-top: calc(var(--default-gap) + 138px);
   padding-bottom: var(--default-gap);
 
+  @mixin fixedElement {
+    width: 100%;
+    max-width: 400px;
+    padding: var(--default-gap);
+    position: fixed;
+    background: white;
+    z-index: 9;
+  }
+
   .navbar {
+    @include fixedElement;
+    top: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    .navbarContainer {
-      display: flex;
-      width: 100%;
-      max-width: 375px;
-      justify-content: space-between;
-    }
+    justify-content: space-between;
   }
 
   .filterBar {
+    @include fixedElement;
     text-align: left;
-    position: fixed;
     top: 50px;
-    padding: var(--default-gap);
-    background: white;
-    z-index: 9;
   }
 
   .card {
@@ -84,9 +85,9 @@
   }
 }
 
-@media (min-width: 462px) {
+@media (max-width: 294px) {
   .Passes {
-    padding-top: calc(var(--default-gap) + 101px);
+    padding-top: calc(var(--default-gap) + 173px);
   }
 }
 

@@ -1,3 +1,3 @@
-import { ToastsContainer } from '@/components/ToastsContainer/ToastsContainer.tsx';
+import { ToastsContainer } from '@/components/ToastsContainer/ToastsContainer';
 
 export default ToastsContainer;

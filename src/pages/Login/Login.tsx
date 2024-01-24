@@ -9,7 +9,7 @@ import LocalStorage from '@/services/LocalStorage';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Logo from '@/components/Logo';
-import { CustomInputGroup } from '@/components/CustomInputGroup/CustomInputGroup.tsx';
+import { CustomInputGroup } from '@/components/CustomInputGroup';
 
 type Props = {
   toasts: typeof Toasts;

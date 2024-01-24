@@ -4,7 +4,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import Layout from '@/components/Layout';
 import Passes from '@/pages/Passes';
 import Login from '@/pages/Login';
-import toasts from '@/store/Toasts.ts';
+import toasts from '@/store/Toasts';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'normalizecss/normalize.css';

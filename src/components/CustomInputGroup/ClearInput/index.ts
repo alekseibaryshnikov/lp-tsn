@@ -1,2 +1,2 @@
-import { ClearInput } from '@/components/CustomInputGroup/ClearInput/ClearInput.tsx';
+import { ClearInput } from '@/components/CustomInputGroup/ClearInput/ClearInput';
 export default ClearInput;

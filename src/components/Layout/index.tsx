@@ -1,2 +1,2 @@
-import Layout from "./Layout.tsx";
+import Layout from './Layout';
 export default Layout;

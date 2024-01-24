@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
-import { LoginRq } from '@/pages/Login/types.ts';
-import { ApiResponse } from '@/core/types.ts';
-import { Pass } from '@/pages/Passes/types.ts';
+import { LoginRq } from '@/pages/Login/types';
+import { ApiResponse } from '@/core/types';
+import { Pass } from '@/pages/Passes/types';
 
 export const handlers = [
   http.post('*', async ({ request }) => {

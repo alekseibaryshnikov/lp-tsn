@@ -1,3 +1,2 @@
-import LocalStorageService from "./LocalStorage.ts";
-
+import LocalStorageService from './LocalStorage';
 export default LocalStorageService;

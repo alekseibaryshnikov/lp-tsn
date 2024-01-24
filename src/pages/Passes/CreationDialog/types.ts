@@ -1,4 +1,4 @@
-import { Nullable } from '@/core/types.ts';
+import { Nullable } from '@/core/types';
 
 export const enum PassStatus {
   temporary = '1',

@@ -1,3 +1,2 @@
-import HttpClient from "./HttpClient.ts";
-
+import HttpClient from './HttpClient';
 export default HttpClient;

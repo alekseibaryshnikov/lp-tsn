@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react-lite';
-import Toasts from '@/store/Toasts.ts';
+import Toasts from '@/store/Toasts';
 import { OverlayToaster, Toast } from '@blueprintjs/core';
 
 type Props = {
