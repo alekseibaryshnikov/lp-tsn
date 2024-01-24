@@ -1,18 +1,18 @@
 import { http, HttpResponse } from 'msw';
-import { LoginRq } from '@/pages/Login/types';
 import { ApiResponse } from '@/core/types';
 import { Pass } from '@/pages/Passes/types';
 
 export const handlers = [
   http.post('*', async ({ request }) => {
-    const requestBody = (await request.json()) as LoginRq;
+    const requestBody = new URLSearchParams(await request.text());
+
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     };
 
-    if (requestBody.action === 'firstStep-Phone') {
+    if (requestBody.get('action') === 'firstStep-Phone') {
       const response = {
         error: '',
         errorText: '',
@@ -26,7 +26,7 @@ export const handlers = [
       });
     }
 
-    if (requestBody.action === 'secondStep-Code') {
+    if (requestBody.get('action') === 'secondStep-Code') {
       const response = {
         error: '',
         errorText: '',
@@ -40,7 +40,7 @@ export const handlers = [
       });
     }
 
-    if (requestBody.action === 'getPassList') {
+    if (requestBody.get('action') === 'getPassList') {
       const response = {
         error: '',
         errorText: '',
@@ -159,7 +159,7 @@ export const handlers = [
       });
     }
 
-    if (requestBody.action === 'createPass') {
+    if (requestBody.get('action') === 'createPass') {
       const response = {
         error: '',
         errorText: '',

@@ -10,11 +10,12 @@ type Props = {
 export const ToastsContainer: FC<Props> = observer(({ toasts }) => {
   return (
     <OverlayToaster>
-      {toasts.toasts.map(toast => (
+      {toasts.toasts.map((toast, index) => (
         <Toast
           {...toast}
           timeout={5000}
           onDismiss={() => toasts.removeToast(toast)}
+          key={index}
         />
       ))}
     </OverlayToaster>

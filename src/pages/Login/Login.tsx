@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useRef, useState } from 'react';
 import { Button, ButtonGroup, FormGroup } from '@blueprintjs/core';
 import { Action, FormValues, LoginRq } from './types';
 import httpClient from '@/services/HttpClient';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Logo from '@/components/Logo';
 import { CustomInputGroup } from '@/components/CustomInputGroup';
+import { addCredentials } from '@/services/HttpClient/HttpClient';
 
 type Props = {
   toasts: typeof Toasts;
@@ -29,6 +30,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
   const nextStep = () => setStep(prev => prev + 1);
   const reset = () => setStep(Steps.Phone);
   const navigate = useNavigate();
+  const ref = useRef<HTMLFormElement>(null);
 
   const showToast = (
     message: Nullable<string>,
@@ -62,18 +64,12 @@ const Login: FC<Props> = observer(({ toasts }) => {
   };
 
   const authRequest = async () => {
+    if (isFormInvalid()) {
+      console.warn('form is invalid', formValues);
+      return;
+    }
+
     const { phone, codeSMS } = formValues;
-
-    if (!phone) {
-      showToast('Введите номер телефона', 'danger');
-      return;
-    }
-
-    if (step === Steps.Code && !codeSMS) {
-      showToast('Введите код СМС', 'danger');
-      return;
-    }
-
     const action: Action =
       step === Steps.Phone ? 'firstStep-Phone' : 'secondStep-Code';
 
@@ -81,11 +77,15 @@ const Login: FC<Props> = observer(({ toasts }) => {
       action,
       phone,
       codeSMS,
-      apiKey: import.meta.env.VITE_API_KEY,
     };
 
     try {
-      const response = await httpClient.post<ApiResponse>('', data);
+      const request = new URLSearchParams(
+        addCredentials(data as Record<string, string>),
+      ).toString();
+      const response = await httpClient.post<ApiResponse>('', request, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      });
 
       if (response.data.error) {
         showToast(response.data.errorText, 'danger');
@@ -118,7 +118,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} ref={ref}>
         <FormGroup fill>
           {step === Steps.Phone && (
             <CustomInputGroup

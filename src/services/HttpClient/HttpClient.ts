@@ -9,30 +9,19 @@ const httpClient = axios.create({
   },
 });
 
-httpClient.interceptors.request.use(
-  (config) => {
-    const token = window.localStorage.getItem('token');
-    const apiKey = import.meta.env.VITE_API_KEY;
+export const addCredentials = (request: Record<string, string>) => {
+  const token = window.localStorage.getItem('token');
+  const apiKey = import.meta.env.VITE_API_KEY;
 
-    config.transformRequest = [
-      (data) => {
-        const transformedData = {...data}
+  if (token) {
+    request.token = token;
+  }
 
-        if (token) {
-          transformedData.token = token;
-        }
+  if (apiKey) {
+    request.apiKey = apiKey;
+  }
 
-        if (apiKey) {
-          transformedData.api_token = apiKey;
-        }
-
-        return JSON.stringify(transformedData);
-      },
-    ];
-
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
+  return request;
+};
 
 export default httpClient;
