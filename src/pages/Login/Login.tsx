@@ -82,6 +82,10 @@ const Login: FC<Props> = observer(({ toasts }) => {
       const response = await httpClient.post<ApiResponse>('', data);
 
       if (response.data.error) {
+        if (response.data.error === 20) {
+          nextStep();
+        }
+
         showToast(response.data.errorText, 'danger');
         return;
       }
