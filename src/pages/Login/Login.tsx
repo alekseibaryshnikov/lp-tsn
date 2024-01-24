@@ -57,7 +57,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
       return true;
     }
 
-    if (step > 0 && (formValues.codeSMS?.length ?? 0) < 6) {
+    if (step > 0 && (formValues.codeSMS?.length ?? 0) < 4) {
       return true;
     }
   };
