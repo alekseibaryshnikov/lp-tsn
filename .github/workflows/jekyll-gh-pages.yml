@@ -43,9 +43,9 @@ jobs:
         run: yarn install
 
       - name: Build Project
-        run: yarn build
         env:
           VITE_API_KEY: ${{ secrets.API_KEY }}
+        run: printenv | grep VITE_ && yarn build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
