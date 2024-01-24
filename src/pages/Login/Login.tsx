@@ -116,7 +116,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
         <FormGroup fill>
           {step === Steps.Phone && (
             <CustomInputGroup
-              type="phone"
+              type="number"
               name="phone"
               placeholder="Телефон"
               onChange={event => {
@@ -125,6 +125,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
                   phone: event.target.value,
                 }));
               }}
+              value={formValues.phone}
               clear={() => setFormValues(prev => ({ ...prev, phone: '' }))}
             />
           )}
@@ -140,6 +141,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
                   codeSMS: event.target.value,
                 });
               }}
+              value={formValues.codeSMS}
               clear={() => setFormValues(prev => ({ ...prev, codeSMS: '' }))}
             />
           )}
