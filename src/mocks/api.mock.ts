@@ -6,6 +6,18 @@ export const handlers = [
   http.post('*', async ({ request }) => {
     const requestBody = new URLSearchParams(await request.text());
 
+    if (!requestBody.get('apiKey')) {
+      return new HttpResponse(
+        JSON.stringify({
+          error: 100,
+          errorText: 'Ошибка доступа.',
+        }),
+        {
+          status: 200,
+        },
+      );
+    }
+
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
@@ -39,8 +51,20 @@ export const handlers = [
         headers: corsHeaders,
       });
     }
-
+    console.log(requestBody.toString());
     if (requestBody.get('action') === 'getPassList') {
+      if (!requestBody.get('token')) {
+        return new HttpResponse(
+          JSON.stringify({
+            error: 100,
+            errorText: 'Ошибка доступа.',
+          }),
+          {
+            status: 200,
+          },
+        );
+      }
+
       const response = {
         error: '',
         errorText: '',
@@ -160,6 +184,18 @@ export const handlers = [
     }
 
     if (requestBody.get('action') === 'createPass') {
+      if (!requestBody.get('token')) {
+        return new HttpResponse(
+          JSON.stringify({
+            error: 100,
+            errorText: 'Ошибка доступа.',
+          }),
+          {
+            status: 200,
+          },
+        );
+      }
+
       const response = {
         error: '',
         errorText: '',

@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Logo from '@/components/Logo';
 import { CustomInputGroup } from '@/components/CustomInputGroup';
-import { addCredentials } from '@/services/HttpClient/HttpClient';
 
 type Props = {
   toasts: typeof Toasts;
@@ -80,12 +79,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
     };
 
     try {
-      const request = new URLSearchParams(
-        addCredentials(data as Record<string, string>),
-      ).toString();
-      const response = await httpClient.post<ApiResponse>('', request, {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      });
+      const response = await httpClient.post<ApiResponse>('', data);
 
       if (response.data.error) {
         showToast(response.data.errorText, 'danger');

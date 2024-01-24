@@ -25,6 +25,7 @@ type Props = {
 const Passes: FC<Props> = ({ toasts }) => {
   const [creationPassDialogVisible, setCreationPassDialogVisible] =
     useState(false);
+
   const toggleCreationPassDialog = () =>
     setCreationPassDialogVisible((prev: boolean) => !prev);
 
@@ -32,24 +33,21 @@ const Passes: FC<Props> = ({ toasts }) => {
   const [filteredPasses, setFilteredPasses] = useState<Pass[]>([]);
   const [onlyActive, setOnlyActive] = useState(false);
   const toggleOnlyActive = () => setOnlyActive((prev: boolean) => !prev);
-
   const [permanent, setPermanent] = useState(true);
   const togglePermanent = () => setPermanent((prev: boolean) => !prev);
-
   const [temporary, setTemporary] = useState(true);
   const toggleTemporary = () => setTemporary((prev: boolean) => !prev);
   const [, refresh] = useReducer(x => x + 1, 0);
+
   const logOut = () => {
     LocalStorageService.removeAuthToken();
     window.location.reload();
   };
 
-  const handleRefresh = () => {
-    return fetchAndSetPasses(setPasses);
-  };
+  const handleRefresh = () => fetchAndSetPasses(setPasses);
 
   useEffect(() => {
-    fetchAndSetPasses(setPasses).then();
+    handleRefresh().then();
   }, []);
 
   useEffect(() => {

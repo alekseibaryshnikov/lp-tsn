@@ -8,7 +8,9 @@ export const fetchAndSetPasses = (
   setPasses: Dispatch<SetStateAction<Pass[]>>,
 ) =>
   httpClient
-    .post('', { action: 'getPassList' })
+    .post('', {
+      action: 'getPassList',
+    })
     .then(response => {
       const passList = response.data.data as Pass[];
 

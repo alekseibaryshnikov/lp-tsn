@@ -33,18 +33,19 @@ export const CreationDialog: FC<Props> = ({
   toasts,
   refresh,
 }) => {
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [passStatus, setPassStatus] = useState<PassStatus>(PassStatus.oneTime);
   const [passType, setPassType] = useState<PassType>(PassType.car);
   const onSubmit = async (formEvent: FormEvent) => {
-    setIsloading(true);
+    setIsLoading(true);
+
     formEvent.preventDefault();
     formEvent.stopPropagation();
+
     const formData = new FormData(formEvent.target as HTMLFormElement);
     formData.set(FormFields.vidPropusk, passStatus);
     formData.set(FormFields.vidAutoOrMan, passType);
     formData.set('action', 'createPass');
-
     try {
       const response = await httpClient.post<ApiResponse>('', formData);
 
@@ -69,7 +70,7 @@ export const CreationDialog: FC<Props> = ({
         intent: 'danger',
       });
     } finally {
-      setIsloading(false);
+      setIsLoading(false);
     }
   };
 
