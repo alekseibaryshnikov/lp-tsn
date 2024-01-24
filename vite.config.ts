@@ -9,8 +9,8 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       manifest: {
-        name: 'Лосиный Парк - заказ пропусков',
-        short_name: 'Заказ пропусков',
+        name: 'СНТСН Лосиный Парк - заказ пропусков',
+        short_name: 'СНТСН',
         description: 'СНТСН Лосиный Парк. Заказ пропусков.',
         theme_color: '#ffffff',
         icons: [
