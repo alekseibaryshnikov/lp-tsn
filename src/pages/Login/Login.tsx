@@ -1,5 +1,5 @@
 import { FC, FormEvent, useState } from 'react';
-import { Button, ControlGroup } from '@blueprintjs/core';
+import { Button, ButtonGroup, FormGroup } from '@blueprintjs/core';
 import { Action, FormValues, LoginRq } from './types';
 import httpClient from '@/services/HttpClient';
 import { observer } from 'mobx-react-lite';
@@ -119,7 +119,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
         <Logo />
       </div>
       <form onSubmit={onFormSubmit}>
-        <ControlGroup fill>
+        <FormGroup fill>
           {step === Steps.Phone && (
             <CustomInputGroup
               type="phone"
@@ -149,13 +149,15 @@ const Login: FC<Props> = observer(({ toasts }) => {
               clear={() => setFormValues(prev => ({ ...prev, codeSMS: '' }))}
             />
           )}
+        </FormGroup>
+        <ButtonGroup fill>
           <Button
             type="submit"
             intent="primary"
             text="Отправить"
             disabled={isFormInvalid()}
           />
-        </ControlGroup>
+        </ButtonGroup>
       </form>
     </div>
   );
