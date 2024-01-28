@@ -116,6 +116,11 @@ const Login: FC<Props> = observer(({ toasts }) => {
     }
   };
 
+  if (LocalStorage.getAuthToken()) {
+    navigate('/');
+    return null;
+  }
+
   return (
     <>
       <Spinner isLoading={isLoading} />

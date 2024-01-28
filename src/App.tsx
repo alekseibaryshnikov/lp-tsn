@@ -18,7 +18,7 @@ function App() {
     <>
       <UpdatePWA />
       <InstallPWA />
-      <BrowserRouter basename={'/lp-tsn/'}>
+      <BrowserRouter basename={'/lp-tsn'}>
         <Routes>
           <Route path="/login" element={<Login toasts={toasts} />} />
           <Route
