@@ -7,7 +7,7 @@ const passList = [
     id: 10006,
     date_start: '2023-12-11 00:00:00',
     date_end: '2023-12-11 23:59:59',
-    date_arrival: null,
+    date_arrival: '2023-12-11 23:59:59',
     number_auto: 'C100OP799',
     pass_name: '',
     comment:

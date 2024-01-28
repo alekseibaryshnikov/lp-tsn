@@ -1,0 +1,59 @@
+.Pass {
+  text-align: left;
+  margin: 0 var(--default-gap);
+
+  div {
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .title {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    span:first-child {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: grey;
+    }
+
+    span:last-child {
+      font-size: smaller;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: white;
+      border-radius: 2px;
+      padding: 0 3px;
+    }
+
+    .awaiting {
+      background: orange;
+    }
+
+    .success {
+      background: green;
+    }
+
+    .expired {
+      background: red;
+    }
+  }
+
+  .name {
+    font-weight: bold;
+  }
+
+  .carPlate {
+    background: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1px 4px;
+    max-width: fit-content;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

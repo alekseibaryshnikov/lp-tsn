@@ -1,19 +1,11 @@
-import { Nullable } from '@/core/types';
-import { Comment } from '@/pages/Passes/Comment';
+import { Pass as PassComponent } from '@/components/Pass';
+import { isValid } from '@/core/pass.utils';
 import { CreationDialog } from '@/pages/Passes/CreationDialog';
 import { fetchAndSetPasses } from '@/pages/Passes/api';
 import { Pass } from '@/pages/Passes/types';
 import LocalStorageService from '@/services/LocalStorage';
 import Toasts from '@/store/Toasts';
-import {
-  Alignment,
-  Button,
-  Card,
-  FormGroup,
-  Icon,
-  Switch,
-} from '@blueprintjs/core';
-import classNames from 'classnames';
+import { Alignment, Button, FormGroup, Icon, Switch } from '@blueprintjs/core';
 import { FC, useEffect, useState } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './Passes.module.scss';
@@ -65,20 +57,6 @@ const Passes: FC<Props> = ({ toasts }) => {
     );
   }, [passes, onlyActive, permanent, temporary]);
 
-  const formatDate = (date: string) => new Date(date).toLocaleDateString();
-  const formatCarPlate = (carPlate: string) =>
-    carPlate.replace(/[^A-Za-z0-9А-Яа-я]/g, '');
-
-  const isValid = (endDate: Nullable<string>, arrived: Nullable<string>) => {
-    if (!endDate) {
-      return true;
-    }
-
-    return new Date(endDate) >= new Date() && !arrived;
-  };
-
-  const title = (pass: Pass) => (pass.date_end ? 'Разовый' : 'Постоянный');
-
   return (
     <PullToRefresh onRefresh={handleRefresh}>
       <aside className={styles.Passes}>
@@ -119,61 +97,7 @@ const Passes: FC<Props> = ({ toasts }) => {
           />
         </FormGroup>
         {filteredPasses.length > 0
-          ? filteredPasses.map(pass => {
-              return (
-                <Card
-                  key={pass.id}
-                  elevation={2}
-                  className={classNames(styles.card, {
-                    [styles.inService]: isValid(
-                      pass.date_end,
-                      pass.date_arrival,
-                    ),
-                    [styles.expired]: !isValid(
-                      pass.date_end,
-                      pass.date_arrival,
-                    ),
-                  })}
-                >
-                  <div className={styles.title}>{title(pass)}</div>
-                  {pass.pass_name && (
-                    <div className={styles.name}>{pass.pass_name}</div>
-                  )}
-                  {pass.number_auto && (
-                    <div className={styles.carPlate}>
-                      {formatCarPlate(pass.number_auto)}
-                    </div>
-                  )}
-                  {pass.date_start && (
-                    <div>
-                      Дата начала:{' '}
-                      <strong>{formatDate(pass.date_start)}</strong>
-                    </div>
-                  )}
-                  {pass.date_end && (
-                    <div>
-                      Дата окончания:{' '}
-                      <strong>{formatDate(pass.date_end)}</strong>
-                    </div>
-                  )}
-                  {pass.date_arrival && (
-                    <div>Дата прибытия: {formatDate(pass.date_arrival)}</div>
-                  )}
-                  {pass.comment && (
-                    <Comment
-                      title="Комментарий для оператора СКУД:"
-                      comment={pass.comment}
-                    />
-                  )}
-                  {pass.comment2 && (
-                    <Comment
-                      title="Комментарий для себя:"
-                      comment={pass.comment2}
-                    />
-                  )}
-                </Card>
-              );
-            })
+          ? filteredPasses.map(pass => <PassComponent pass={pass} />)
           : 'Ничего не найдено'}
         <CreationDialog
           isOpen={creationPassDialogVisible}
