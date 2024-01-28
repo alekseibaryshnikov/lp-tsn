@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => ({
         short_name: 'СНТСН',
         description: 'СНТСН Лосиный Парк. Заказ пропусков.',
         theme_color: '#ffffff',
+        start_url: '/',
+        display: 'standalone',
         icons: [
           {
             src: 'moose_logo_192x192.png',
@@ -27,26 +29,26 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png}'], // patterns to determine the files to be precached
-        globDirectory: 'dist/', // directory where the files are located
-        swDest: 'dist/sw.js', // output path for the generated service worker file
-        navigateFallback: '/index.html', // fallback URL for navigation requests
+        globPatterns: ['**/*.{js,css,html,svg,png}'],
+        globDirectory: 'dist/',
+        swDest: 'dist/sw.js',
+        navigateFallback: '/index.html',
         runtimeCaching: [
           {
-            urlPattern: /^https?.*/, // matches all http and https requests
-            handler: 'NetworkFirst', // network-first strategy for navigation requests
+            urlPattern: /^https?.*/,
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'https-calls',
               expiration: {
                 maxEntries: 150,
                 maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
               },
-              networkTimeoutSeconds: 10, // fall back to cache if network does not respond within 10 seconds
+              networkTimeoutSeconds: 10,
             },
           },
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg)$/, // matches image files
-            handler: 'CacheFirst', // cache-first strategy for image files
+            urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+            handler: 'CacheFirst',
             options: {
               cacheName: 'images',
               expiration: {
@@ -55,7 +57,18 @@ export default defineConfig(({ mode }) => ({
               },
             },
           },
+          {
+            urlPattern: /\.(?:js|css)$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'static-resources',
+            },
+          },
         ],
+      },
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
       },
     }),
   ],

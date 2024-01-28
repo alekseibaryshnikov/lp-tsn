@@ -11,12 +11,12 @@ import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import InstallPWA from '@/components/InstallPWA/InstallPWA';
+import UpdatePWA from '@/components/UpdatePWA/UpdatePWA';
 
 function App() {
   return (
-    <>
+    <UpdatePWA>
       <InstallPWA />
-
       <BrowserRouter basename={'/lp-tsn/'}>
         <Routes>
           <Route path="/login" element={<Login toasts={toasts} />} />
@@ -32,7 +32,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ToastsContainer toasts={toasts} />
-    </>
+    </UpdatePWA>
   );
 }
 
