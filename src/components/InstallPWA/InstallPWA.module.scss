@@ -1,0 +1,16 @@
+.InstallPWA {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+}
