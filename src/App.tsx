@@ -15,7 +15,8 @@ import UpdatePWA from '@/components/UpdatePWA/UpdatePWA';
 
 function App() {
   return (
-    <UpdatePWA>
+    <>
+      <UpdatePWA />
       <InstallPWA />
       <BrowserRouter basename={'/lp-tsn/'}>
         <Routes>
@@ -32,7 +33,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ToastsContainer toasts={toasts} />
-    </UpdatePWA>
+    </>
   );
 }
 
