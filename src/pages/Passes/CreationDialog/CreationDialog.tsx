@@ -18,7 +18,7 @@ import { FC, FormEvent, useState } from 'react';
 import httpClient from '@/services/HttpClient';
 import Toasts from '@/store/Toasts';
 import { ApiResponse } from '@/core/types';
-import { Spinner } from '@/pages/Passes/CreationDialog/Spinner';
+import { Spinner } from '@/components/Spinner';
 
 type Props = {
   isOpen: boolean;

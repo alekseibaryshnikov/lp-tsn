@@ -138,9 +138,15 @@ export const handlers = [
         info: '',
       } as unknown as ApiResponse;
 
-      return new HttpResponse(JSON.stringify(response), {
-        headers: corsHeaders,
-      });
+      return new Promise(resolve =>
+        setTimeout(() => {
+          resolve(
+            new HttpResponse(JSON.stringify(response), {
+              headers: corsHeaders,
+            }),
+          );
+        }, 3000),
+      );
     }
 
     if (requestBody.get('action') === 'secondStep-Code') {

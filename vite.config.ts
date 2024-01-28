@@ -9,9 +9,9 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       manifest: {
-        name: 'СНТ СН Лосиный Парк',
-        short_name: 'СНТ СН Лосиный Парк',
-        description: 'СНТ СН Лосиный Парк.',
+        name: 'СНТ Лосиный Парк',
+        short_name: 'СНТ ЛП',
+        description: 'СНТ Лосиный Парк.',
         theme_color: '#ffffff',
         start_url: '/',
         display: 'standalone',
@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => ({
       },
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: true,
       },
     }),
   ],
