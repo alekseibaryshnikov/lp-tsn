@@ -1,5 +1,10 @@
-import { FC, useEffect, useReducer, useState } from 'react';
+import { Nullable } from '@/core/types';
+import { Comment } from '@/pages/Passes/Comment';
+import { CreationDialog } from '@/pages/Passes/CreationDialog';
+import { fetchAndSetPasses } from '@/pages/Passes/api';
 import { Pass } from '@/pages/Passes/types';
+import LocalStorageService from '@/services/LocalStorage';
+import Toasts from '@/store/Toasts';
 import {
   Alignment,
   Button,
@@ -8,15 +13,10 @@ import {
   Icon,
   Switch,
 } from '@blueprintjs/core';
-import styles from './Passes.module.scss';
-import { Nullable } from '@/core/types';
-import Toasts from '@/store/Toasts';
-import { CreationDialog } from '@/pages/Passes/CreationDialog';
-import LocalStorageService from '@/services/LocalStorage';
-import { Comment } from '@/pages/Passes/Comment';
 import classNames from 'classnames';
-import { fetchAndSetPasses } from '@/pages/Passes/api';
+import { FC, useEffect, useState } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+import styles from './Passes.module.scss';
 
 type Props = {
   toasts: typeof Toasts;
@@ -37,7 +37,6 @@ const Passes: FC<Props> = ({ toasts }) => {
   const togglePermanent = () => setPermanent((prev: boolean) => !prev);
   const [temporary, setTemporary] = useState(true);
   const toggleTemporary = () => setTemporary((prev: boolean) => !prev);
-  const [, refresh] = useReducer(x => x + 1, 0);
 
   const logOut = () => {
     LocalStorageService.removeAuthToken();
@@ -47,7 +46,7 @@ const Passes: FC<Props> = ({ toasts }) => {
   const handleRefresh = () => fetchAndSetPasses(setPasses);
 
   useEffect(() => {
-    handleRefresh().then();
+    handleRefresh();
   }, []);
 
   useEffect(() => {
@@ -180,7 +179,7 @@ const Passes: FC<Props> = ({ toasts }) => {
           isOpen={creationPassDialogVisible}
           onClose={toggleCreationPassDialog}
           toasts={toasts}
-          refresh={refresh}
+          refresh={handleRefresh}
         />
       </aside>
     </PullToRefresh>

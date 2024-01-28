@@ -11,12 +11,10 @@ import 'normalizecss/normalize.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import ToastsContainer from '@/components/ToastsContainer';
-import PwaInstallNotification from '@/components/PwaInstallButton/PwaInstallNotification';
 
 function App() {
   return (
     <>
-      <PwaInstallNotification />
       <BrowserRouter basename={'/lp-tsn/'}>
         <Routes>
           <Route path="/login" element={<Login toasts={toasts} />} />
