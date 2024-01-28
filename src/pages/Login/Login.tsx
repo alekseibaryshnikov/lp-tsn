@@ -87,6 +87,8 @@ const Login: FC<Props> = observer(({ toasts }) => {
         }
 
         showToast(response.data.errorText, 'danger');
+        setStep(Steps.Phone);
+
         return;
       }
 
