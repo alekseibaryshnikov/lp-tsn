@@ -3,6 +3,7 @@ import { Pass } from '@/pages/Passes/types';
 import { sortByDate } from '@/core/date.utils';
 import toasts from '@/store/Toasts';
 import { Dispatch, SetStateAction } from 'react';
+import { ApiResponse } from '@/core/types';
 
 export const fetchAndSetPasses = (
   setPasses: Dispatch<SetStateAction<Pass[]>>,
@@ -12,7 +13,13 @@ export const fetchAndSetPasses = (
       action: 'getPassList',
     })
     .then(response => {
-      const passList = response.data.data as Pass[];
+      const data = response.data as ApiResponse;
+
+      if (data.error) {
+        return data;
+      }
+
+      const passList = data.data as Pass[];
 
       const expired = sortByDate(
         passList.filter(

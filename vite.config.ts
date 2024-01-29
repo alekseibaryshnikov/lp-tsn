@@ -4,10 +4,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/lp-tsn/',
   plugins: [
     react(),
     VitePWA({
+      injectRegister: 'auto',
       manifest: {
         name: 'СНТ Лосиный Парк',
         short_name: 'СНТ ЛП',

@@ -18,7 +18,12 @@ const InstallPWA: React.FC = () => {
   useEffect(() => {
     const handler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
-      setPromptInstall(e);
+
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('display-mode is standalone');
+      } else {
+        setPromptInstall(e);
+      }
     };
 
     window.addEventListener('beforeinstallprompt', handler as any);

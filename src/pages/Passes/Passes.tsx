@@ -97,7 +97,9 @@ const Passes: FC<Props> = ({ toasts }) => {
           />
         </FormGroup>
         {filteredPasses.length > 0
-          ? filteredPasses.map(pass => <PassComponent pass={pass} />)
+          ? filteredPasses.map(pass => (
+              <PassComponent pass={pass} key={pass.id} />
+            ))
           : 'Ничего не найдено'}
         <CreationDialog
           isOpen={creationPassDialogVisible}

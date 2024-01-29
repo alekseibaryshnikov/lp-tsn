@@ -1,11 +1,16 @@
 import { FC, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useCheckTokenHook } from '@/core/hooks/useCheckTokenHook';
+import { Spinner } from '@/components/Spinner';
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  const isTokenValid = useCheckTokenHook();
+  const { isLoading, isValid } = useCheckTokenHook();
 
-  if (isTokenValid) {
+  if (isLoading) {
+    return <Spinner isLoading={isLoading} />;
+  }
+
+  if (isValid) {
     return <>{children}</>;
   }
 
