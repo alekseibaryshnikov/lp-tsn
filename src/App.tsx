@@ -10,14 +10,10 @@ import 'normalizecss/normalize.css';
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import InstallPWA from '@/components/InstallPWA/InstallPWA';
-import UpdatePWA from '@/components/UpdatePWA/UpdatePWA';
 
 function App() {
   return (
     <>
-      <UpdatePWA />
-      <InstallPWA />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login toasts={toasts} />} />

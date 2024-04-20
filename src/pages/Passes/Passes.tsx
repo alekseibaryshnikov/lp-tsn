@@ -9,6 +9,7 @@ import { Alignment, Button, FormGroup, Icon, Switch } from '@blueprintjs/core';
 import { FC, useEffect, useState } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './Passes.module.scss';
+import UpdatePWA from '@/components/UpdatePWA/UpdatePWA';
 
 type Props = {
   toasts: typeof Toasts;
@@ -58,57 +59,60 @@ const Passes: FC<Props> = ({ toasts }) => {
   }, [passes, onlyActive, permanent, temporary]);
 
   return (
-    <PullToRefresh onRefresh={handleRefresh}>
-      <aside className={styles.Passes}>
-        <div className={styles.navbar}>
-          <Button
-            intent="success"
-            text="Заказать пропуск"
-            onClick={toggleCreationPassDialog}
+    <>
+      <UpdatePWA />
+      <PullToRefresh onRefresh={handleRefresh}>
+        <aside className={styles.Passes}>
+          <div className={styles.navbar}>
+            <Button
+              intent="success"
+              text="Заказать пропуск"
+              onClick={toggleCreationPassDialog}
+            />
+            <Button
+              text={<Icon icon="log-out" />}
+              onClick={logOut}
+              active={false}
+              intent="primary"
+            />
+          </div>
+          <FormGroup className={styles.filterBar}>
+            <Switch
+              alignIndicator={Alignment.LEFT}
+              inline
+              label="Активные"
+              checked={onlyActive}
+              onChange={toggleOnlyActive}
+            />
+            <Switch
+              alignIndicator={Alignment.LEFT}
+              inline
+              label="Постоянные"
+              checked={permanent}
+              onChange={togglePermanent}
+            />
+            <Switch
+              alignIndicator={Alignment.LEFT}
+              inline
+              label="Временные"
+              checked={temporary}
+              onChange={toggleTemporary}
+            />
+          </FormGroup>
+          {filteredPasses.length > 0
+            ? filteredPasses.map(pass => (
+                <PassComponent pass={pass} key={pass.id} />
+              ))
+            : 'Ничего не найдено'}
+          <CreationDialog
+            isOpen={creationPassDialogVisible}
+            onClose={toggleCreationPassDialog}
+            toasts={toasts}
+            refresh={handleRefresh}
           />
-          <Button
-            text={<Icon icon="log-out" />}
-            onClick={logOut}
-            active={false}
-            intent="primary"
-          />
-        </div>
-        <FormGroup className={styles.filterBar}>
-          <Switch
-            alignIndicator={Alignment.LEFT}
-            inline
-            label="Активные"
-            checked={onlyActive}
-            onChange={toggleOnlyActive}
-          />
-          <Switch
-            alignIndicator={Alignment.LEFT}
-            inline
-            label="Постоянные"
-            checked={permanent}
-            onChange={togglePermanent}
-          />
-          <Switch
-            alignIndicator={Alignment.LEFT}
-            inline
-            label="Временные"
-            checked={temporary}
-            onChange={toggleTemporary}
-          />
-        </FormGroup>
-        {filteredPasses.length > 0
-          ? filteredPasses.map(pass => (
-              <PassComponent pass={pass} key={pass.id} />
-            ))
-          : 'Ничего не найдено'}
-        <CreationDialog
-          isOpen={creationPassDialogVisible}
-          onClose={toggleCreationPassDialog}
-          toasts={toasts}
-          refresh={handleRefresh}
-        />
-      </aside>
-    </PullToRefresh>
+        </aside>
+      </PullToRefresh>
+    </>
   );
 };
 

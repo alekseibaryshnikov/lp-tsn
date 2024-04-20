@@ -11,6 +11,7 @@ import styles from './Login.module.scss';
 import Logo from '@/components/Logo';
 import { CustomInputGroup } from '@/components/CustomInputGroup';
 import { Spinner } from '@/components/Spinner';
+import InstallPWA from '@/components/InstallPWA/InstallPWA';
 
 type Props = {
   toasts: typeof Toasts;
@@ -118,6 +119,7 @@ const Login: FC<Props> = observer(({ toasts }) => {
 
   return (
     <>
+      <InstallPWA />
       <Spinner isLoading={isLoading} />
       <div className={styles.Login}>
         <div className={styles.logo}>
