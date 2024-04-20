@@ -21,31 +21,7 @@ export const fetchAndSetPasses = (
 
       const passList = data.data as Pass[];
 
-      const expired = sortByDate(
-        passList.filter(
-          pass => pass.date_end && new Date(pass.date_end) < new Date(),
-        ),
-        'date_end',
-        true,
-      );
-
-      const active = passList.filter(
-        pass => !expired.some(item => item.id === pass.id),
-      );
-
-      const temporary = sortByDate(
-        active.filter(pass => pass.date_end),
-        'date_end',
-        true,
-      );
-
-      const permanent = sortByDate(
-        active.filter(pass => !pass.date_end),
-        'date_start',
-        true,
-      );
-
-      setPasses([...temporary, ...permanent, ...expired]);
+      setPasses(sortByDate(passList, 'date_end'));
     })
     .catch(error => {
       console.log(error);
