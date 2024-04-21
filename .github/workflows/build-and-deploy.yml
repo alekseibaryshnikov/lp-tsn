@@ -46,6 +46,9 @@ jobs:
           VITE_API_KEY: ${{ secrets.API_KEY }}
         run: printenv | grep VITE_ && yarn build
 
+      - name: List directory contents
+        run: ls -la
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
