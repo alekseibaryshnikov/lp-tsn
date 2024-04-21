@@ -31,9 +31,9 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png}'],
-        globDirectory: 'dist/',
-        swDest: 'dist/sw.js',
-        navigateFallback: '/index.html',
+        globDirectory: './',
+        swDest: './sw.js',
+        navigateFallback: './index.html',
         runtimeCaching: [
           {
             urlPattern: /^https?.*/,
