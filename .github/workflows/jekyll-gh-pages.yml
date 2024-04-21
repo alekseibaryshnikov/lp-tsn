@@ -47,17 +47,6 @@ jobs:
           VITE_API_KEY: ${{ secrets.API_KEY }}
         run: printenv | grep VITE_ && yarn build
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          ftp-server: ftp://<your-ftp-server>
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: distt
-        env:
-          VITE_API_KEY: ${{ secrets.API_KEY }}
-        run: printenv | grep VITE_ && yarn build
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
